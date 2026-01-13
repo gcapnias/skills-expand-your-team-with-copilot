@@ -521,8 +521,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Create difficulty badge (only if difficulty_level is specified)
     const difficultyBadge = details.difficulty_level ? `
-      <span class="difficulty-badge difficulty-${details.difficulty_level.toLowerCase()}">
-        ${details.difficulty_level}
+      <span class="difficulty-badge difficulty-${details.difficulty_level.toLowerCase().replace(/[^a-z]/g, '')}">
+        ${details.difficulty_level.replace(/</g, '&lt;').replace(/>/g, '&gt;')}
       </span>
     ` : '';
 
