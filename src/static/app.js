@@ -31,6 +31,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Dark mode functionality
   function initializeDarkMode() {
+    if (!darkModeToggle || !darkModeIcon) {
+      console.warn("Dark mode elements not found");
+      return;
+    }
+    
     const savedDarkMode = localStorage.getItem("darkMode");
     if (savedDarkMode === "enabled") {
       enableDarkMode();
@@ -38,12 +43,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function enableDarkMode() {
+    if (!darkModeIcon) return;
     document.body.classList.add("dark-mode");
     darkModeIcon.textContent = "☀️";
     localStorage.setItem("darkMode", "enabled");
   }
 
   function disableDarkMode() {
+    if (!darkModeIcon) return;
     document.body.classList.remove("dark-mode");
     darkModeIcon.textContent = "🌙";
     localStorage.setItem("darkMode", "disabled");
@@ -58,7 +65,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Event listener for dark mode toggle
-  darkModeToggle.addEventListener("click", toggleDarkMode);
+  if (darkModeToggle) {
+    darkModeToggle.addEventListener("click", toggleDarkMode);
+  }
 
   // Activity categories with corresponding colors
   const activityTypes = {
